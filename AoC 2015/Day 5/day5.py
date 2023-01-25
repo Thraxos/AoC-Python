@@ -6,7 +6,6 @@ f.close()
 
 nice_count1 = 0
 forbidden = ["ab", "cd", "pq", "xy"]
-
 for line in lines:
     line = line.rstrip()
     check1 = {x : line.count(x) for x in set("aeiou")}
@@ -20,21 +19,19 @@ for line in lines:
 nice_count2 = 0
 for line in lines:
     line = line.rstrip()
-    check_count = 0
     flag1 = 0
     flag2 = 0
-    for i in range(len(line)):
-        sub = line[:i] + line[i+2:]
-        if line[i:i+2:] in sub and flag1 == 0:
-            check_count += 1
+    for i in range(len(line)-3):
+        sub = line[i:i+2]
+        if sub in line[i+2:]:
             flag1 = 1
-        if i < len(line)-2:
-            if line[i] == line[i+2] and flag2 == 0:
-                check_count += 1
-                flag2 = 1
-        if check_count == 2:
-            nice_count2 += 1
             break
+    for i in range(len(line)-2):
+        if line[i] == line[i+2]:
+            flag2 = 1
+            break
+    if flag1 == 1 and flag2 == 1:
+        nice_count2 += 1
 
 print(f"The number of strings that are nice in the first model is: {nice_count1}")
 print(f"The number of strings that are nice in the second model is: {nice_count2}")
