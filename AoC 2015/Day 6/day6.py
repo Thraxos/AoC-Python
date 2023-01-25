@@ -1,6 +1,7 @@
 import os
 import sys
 import numpy as np
+#import matplotlib.pyplot as plt
 with open(os.path.join(sys.path[0], "input.txt"), "r") as f:
     lines = f.readlines()
 f.close()
@@ -34,6 +35,11 @@ for line in lines:
                 grid1[i,j] = 0.0
                 if grid2[i,j] > 0.0:
                     grid2[i,j] -= 1.0
+    #plt.imshow(grid2)
+    #plt.draw()
+    #plt.pause(0.001)
+    #plt.clf()
+    
 
 print(f"The number of lights that are lit after following the first instructions are: {int(sum(sum(grid1)))}")
 print(f"The number of lights that are lit after following the second instructions are: {int(sum(sum(grid2)))}")
