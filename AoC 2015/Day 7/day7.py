@@ -23,7 +23,7 @@ def get_signal(source):
 
     if "NOT" in signal:
         return ~get_signal(signal[1])
-    if "AND" in signal:
+    elif "AND" in signal:
         return get_signal(signal[0]) & get_signal(signal[2])
     elif "OR" in signal:
         return get_signal(signal[0]) | get_signal(signal[2])
