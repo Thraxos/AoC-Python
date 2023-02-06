@@ -5,23 +5,29 @@ with open(os.path.join(sys.path[0], "input.txt"), "r") as f:
     lines = f.readlines()
 f.close()
 
-graph = {}
-graph["Dummy"] = []
+places = set()
+distances = dict()
 
 for line in lines:
     line = line.rstrip()
     locations, distance = line.split(" = ")
     loc1, loc2 = locations.split(" to ")
-    if loc1 not in graph:
-        graph[loc1] = [[loc2, int(distance)]]
-        graph[loc1].append(["Dummy", 0])
-        graph["Dummy"].append([loc1,0])
-    else:
-        graph[loc1].append([loc2, int(distance)])
-    if loc2 not in graph:
-        graph[loc2] = [[loc1, int(distance)]]
-        graph[loc2].append(["Dummy", 0])
-        graph["Dummy"].append([loc2,0])
-    else:
-        graph[loc2].append([loc1, int(distance)])
+    places.add(loc1)
+    places.add(loc2)
+    distances.setdefault(loc1, dict())[loc2] = int(distance)
+    distances.setdefault(loc2, dict())[loc1] = int(distance)
 
+shortest = sys.maxsize
+longest = 0
+
+for items in permutations(places):
+    dist = sum(map(lambda x, y: distances[x][y], items[:-1], items[1:]))
+    if dist < shortest:
+        current_shortest_path = items
+    if dist > longest:
+        current_longest_path = items
+    shortest = min(shortest, dist)
+    longest = max(longest, dist)
+
+print(f"The shortest path has length: {shortest}, and the path is: {current_shortest_path}")
+print(f"The longest path has length: {longest}, and the path is: {current_longest_path}")
