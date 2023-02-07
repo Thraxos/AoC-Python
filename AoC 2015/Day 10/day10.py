@@ -9,5 +9,5 @@ while steps < 50:
         length_1 = len(sequence)
     steps += 1
 
-print(f"The length of the sequence in the 40th step is: {length_1}")
-print(f"The length of the sequence in the 50th step is: {len(sequence)}")
+print(f"The length of the sequence after the 40th step is: {length_1}")
+print(f"The length of the sequence after the 50th step is: {len(sequence)}")
