@@ -48,6 +48,6 @@ def find_happiest_order(happiness, invited, happiest, part):
 happiest1, current_order1 = find_happiest_order(happiness, invited, happiest, 1)
 happiest2, current_order2 = find_happiest_order(happiness, invited, happiest, 2)
 
-print(f"The total change in happiness that doesn't include me is: {happiest1}, and the seating order is {current_order1}")
-print(f"The total change in happiness that includes me is: {happiest2}, and the seating order is {current_order2}")
+print(f"The total change in happiness that doesn't include me is: {happiest1}, and the seating order is: {current_order1}")
+print(f"The total change in happiness that includes me is: {happiest2}, and the seating order is: {current_order2}")
 
