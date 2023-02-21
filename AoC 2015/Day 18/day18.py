@@ -27,29 +27,59 @@ for line in lines:
             grid[i].append(1)
         elif char == ".":
             grid[i].append(0)
-            
     i += 1
 
-old_grid = grid
-new_grid = [[0]*100]*100
+old_grid1 = grid
+old_grid2 = grid
+new_grid1 = [[0]*100 for _ in range(100)]
+new_grid2 = [[0]*100 for _ in range(100)]
+
 for step in range(0,100):
     i = 0
     j = 0
-    for line in old_grid:
+    for line in old_grid1:
         for light in line:
-            if light == 1 and not count_neighbors_on(old_grid, i, j) in [2, 3]:
-                light = 0
-            elif light == 0 and count_neighbors_on(old_grid, i, j) == 3:
-                light = 1
-            new_grid[i][j] = light
+            if (light == 1) and not (count_neighbors_on(old_grid1, i, j) in [2, 3]):
+                new_grid1[i][j] = 0
+            elif (light == 0) and (count_neighbors_on(old_grid1, i, j) == 3):
+                new_grid1[i][j] = 1
+            else:
+                new_grid1[i][j] = light
             j += 1
         j = 0
         i += 1
-    old_grid = new_grid
-    new_grid = [[0]*100]*100
+    old_grid1 = new_grid1
+    new_grid1 = [[0]*100 for _ in range(100)]
 
-sum = 0
-for row in old_grid:
+    i = 0
+    j = 0
+    for line in old_grid2:
+        for light in line:
+            if (light == 1) and not (count_neighbors_on(old_grid2, i, j) in [2, 3]):
+                new_grid2[i][j] = 0
+            elif (light == 0) and (count_neighbors_on(old_grid2, i, j) == 3):
+                new_grid2[i][j] = 1
+            else:
+                new_grid2[i][j] = light
+            j += 1
+        j = 0
+        i += 1
+    old_grid2 = new_grid2
+    old_grid2[0][0] = 1
+    old_grid2[0][99] = 1
+    old_grid2[99][0] = 1
+    old_grid2[99][99] = 1
+    new_grid2 = [[0]*100 for _ in range(100)]
+
+sum1 = 0
+for row in old_grid1:
     for element in row:
-        sum += element
-print(sum)
+        sum1 += element
+
+sum2 = 0
+for row in old_grid2:
+    for element in row:
+        sum2 += element
+
+print(f"The number of lights that are on for part 1 is: {sum1}")
+print(f"The number of lights that are on for part 2 is: {sum2}")
