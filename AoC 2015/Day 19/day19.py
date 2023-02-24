@@ -35,4 +35,5 @@ while current_molecule != "e":
             current_molecule = current_molecule[0:positions[0]] + replace_this + current_molecule[positions[0]+len(with_this):]
             steps += 1
             positions = [i for i in range(len(current_molecule)) if current_molecule.startswith(with_this, i)]
-print(steps)
+
+print(f"The fewest number of steps to go from e to the medicine molecule is: {steps}")
